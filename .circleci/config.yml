@@ -1,0 +1,42 @@
+version: 2.1
+
+jobs:
+  docker_layer_caching:
+    docker:
+    - image: cimg/base:stable
+    steps:
+    - run: which docker
+    - run: docker -v
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - run:
+        name: Build a really docker image
+        command: |
+          dockerfile=Dockerfile
+          echo "FROM alpine:latest" > $dockerfile
+          echo "RUN echo hello" >> $dockerfile
+          docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
+          docker run --rm throwaway:$CIRCLE_BUILD_NUM
+    - run: docker version
+  machine_dlc:
+    machine:
+      docker_layer_caching: true
+    steps:
+    - run: which docker
+    - run: docker -v
+    - run:
+        name: Build a really docker image
+        command: |
+          dockerfile=Dockerfile
+          echo "FROM alpine:latest" > $dockerfile
+          echo "RUN echo hello" >> $dockerfile
+          docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
+          docker run --rm throwaway:$CIRCLE_BUILD_NUM
+    - run: docker version
+    
+workflows:
+  version: 2
+  vm_jobs:
+    jobs:
+      - docker_layer_caching
+      - machine_dlc
