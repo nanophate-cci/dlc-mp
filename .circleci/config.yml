@@ -34,7 +34,7 @@ jobs:
     - run: docker version
     - run:
         name: Retrive logs
-        command: journalctl
+        command: docker logs
         when: always
 
     
