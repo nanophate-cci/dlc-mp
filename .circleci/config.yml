@@ -32,6 +32,11 @@ jobs:
           docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
           docker run --rm throwaway:$CIRCLE_BUILD_NUM
     - run: docker version
+    - run:
+        name: Retrive logs
+        command: journalctl
+        when: always
+
     
 workflows:
   version: 2
