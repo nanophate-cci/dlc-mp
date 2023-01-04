@@ -16,7 +16,6 @@ jobs:
           echo "RUN echo hello" >> $dockerfile
           docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
           docker run --rm throwaway:$CIRCLE_BUILD_NUM
-    - run: journalctl --no-pager
   machine_dlc:
     machine:
       docker_layer_caching: true
@@ -34,7 +33,7 @@ jobs:
     - run: docker version
     - run:
         name: Retrive logs
-        command: docker logs
+        command: journalctl --no-pager
         when: always
 
     
