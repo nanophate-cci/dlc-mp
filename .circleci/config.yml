@@ -17,8 +17,7 @@ jobs:
           docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
           docker run --rm throwaway:$CIRCLE_BUILD_NUM
   machine_dlc:
-    machine:
-      docker_layer_caching: true
+    machine: true
     steps:
     - run: which docker
     - run: docker -v
