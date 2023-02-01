@@ -41,4 +41,8 @@ workflows:
   vm_jobs:
     jobs:
       - docker_layer_caching
+      - hold:
+          type: approval
+          requires:
+            - docker_layer_caching
       - machine_dlc
