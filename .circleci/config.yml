@@ -45,4 +45,6 @@ workflows:
           type: approval
           requires:
             - docker_layer_caching
-      - machine_dlc
+      - machine_dlc:
+          requires:
+            - hold
