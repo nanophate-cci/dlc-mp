@@ -20,6 +20,7 @@ jobs:
     - run: |
         mkdir mem
         docker run -v $(pwd)/mem:/momo throwaway:$CIRCLE_BUILD_NUM touch momo/awa.txt
+        ls -la mem
   machine_dlc:
     machine: true
     steps:
