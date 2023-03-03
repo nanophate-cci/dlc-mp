@@ -14,9 +14,12 @@ jobs:
         command: |
           dockerfile=Dockerfile
           echo "FROM alpine:latest" > $dockerfile
+          echo "RUN mkdir tmp" > $dockerfile
           echo "RUN echo hello" >> $dockerfile
           docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
-          docker run --rm throwaway:$CIRCLE_BUILD_NUM
+    - run: |
+        mkdir mem
+        docker run -v $(pwd)/mem:/tmp throwaway:$CIRCLE_BUILD_NUM touch tmp/awa.txt
   machine_dlc:
     machine: true
     steps:
