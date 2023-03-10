@@ -25,6 +25,10 @@ jobs:
   machine_dlc:
     machine: true
     steps:
+    - run:
+        name: Retrive logs
+        command: journalctl --no-pager
+        background: true
     - run: which docker
     - run: docker -v
     - run:
