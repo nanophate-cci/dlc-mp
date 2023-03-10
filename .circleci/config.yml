@@ -27,7 +27,7 @@ jobs:
     steps:
     - run:
         name: Retrive logs
-        command: journalctl --no-pager
+        command: journalctl -f --no-pager
         background: true
     - run: which docker
     - run: docker -v
