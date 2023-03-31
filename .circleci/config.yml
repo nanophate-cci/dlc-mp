@@ -8,6 +8,7 @@ jobs:
     - run: which docker
     - run: docker -v
     - run:
+        name: process record 
         command: |
           while true; do
             date
