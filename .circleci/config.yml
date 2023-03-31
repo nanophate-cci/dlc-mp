@@ -24,6 +24,7 @@ jobs:
           echo "FROM alpine:latest" > $dockerfile
           echo "RUN mkdir momo" >> $dockerfile
           echo "RUN echo hello" >> $dockerfile
+          echo "RUN apk update && apk add bash vim openssl ruby" >> $dockerfile
           docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
     - run: |
         mkdir mem
