@@ -4,7 +4,6 @@ jobs:
   docker_layer_caching:
     docker:
     - image: cimg/base:stable
-    - image: public.ecr.aws/lambda/ruby:2.5.2023.02.20.14
     steps:
     - run: which docker
     - run: docker -v
