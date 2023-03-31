@@ -17,7 +17,7 @@ jobs:
           done
         background: true
     - setup_remote_docker:
-        version: 20.10.18
+        version: 20.10.2 
         docker_layer_caching: true
     - run:
         name: Build a really docker image
