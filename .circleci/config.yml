@@ -28,6 +28,7 @@ jobs:
           echo "RUN echo hello" >> $dockerfile
           echo "RUN apk update && apk add bash vim openssl ruby" >> $dockerfile
           docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
+    - run: sleep 180
     - run: |
         mkdir mem
         docker run -v $(pwd)/mem:/momo throwaway:$CIRCLE_BUILD_NUM touch momo/awa.txt
