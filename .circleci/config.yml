@@ -33,7 +33,6 @@ jobs:
         mkdir mem
         docker run -v $(pwd)/mem:/momo throwaway:$CIRCLE_BUILD_NUM touch momo/awa.txt
         ls -la mem
-    - run: sleep 500
   machine_dlc:
     machine: true
     steps:
