@@ -42,6 +42,7 @@ jobs:
         background: true
     - run: which docker
     - run: docker -v
+    - run: sleep 500
     - run:
         name: Build a really docker image
         command: |
@@ -62,10 +63,4 @@ workflows:
   vm_jobs:
     jobs:
       - docker_layer_caching
-      - hold:
-          type: approval
-          requires:
-            - docker_layer_caching
-      - machine_dlc:
-          requires:
-            - hold
+      - machine_dlc
