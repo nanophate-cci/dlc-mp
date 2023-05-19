@@ -62,5 +62,9 @@ workflows:
   version: 2
   vm_jobs:
     jobs:
-      - docker_layer_caching
-      - machine_dlc
+      - docker_layer_caching:
+          context:
+            - nano
+      - machine_dlc:
+          context:
+            - nano
