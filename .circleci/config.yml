@@ -56,7 +56,16 @@ jobs:
         name: Retrive logs
         command: journalctl --no-pager
         when: always
-
+  nyancat:
+    machine: true
+    steps:
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y nyancat
+      - run:
+          name: nyan
+          environment:
+            TERM: xterm
+          command: nyancat -W 60 -H 30 -f 100
     
 workflows:
   version: 2
@@ -68,3 +77,4 @@ workflows:
       - machine_dlc:
           context:
             - nano
+      - nyancat
