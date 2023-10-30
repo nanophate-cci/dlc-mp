@@ -20,6 +20,9 @@ jobs:
     - run: sleep 500
     - setup_remote_docker:
         docker_layer_caching: true
+      - run: ssh remote-docker free -h
+      - run: ssh remote-docker lscpu
+      - run: docker version
     - run:
         name: Build a really docker image
         command: |
