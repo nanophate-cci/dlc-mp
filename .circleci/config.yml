@@ -4,7 +4,7 @@ jobs:
   docker_layer_caching:
     docker:
     - image: cimg/base:stable
-    parallelism: 10
+    parallelism: 1
     steps:
     - run: which docker
     - run: docker -v
@@ -75,9 +75,5 @@ workflows:
   vm_jobs:
     jobs:
       - docker_layer_caching:
-          context:
-            - nano
       - machine_dlc:
-          context:
-            - nano
       - nyancat
