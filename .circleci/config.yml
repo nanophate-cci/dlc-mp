@@ -8,6 +8,7 @@ jobs:
     steps:
     - run: which docker
     - run: docker -v
+    - run: free -h
     - run:
         name: process record 
         command: |
