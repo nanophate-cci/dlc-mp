@@ -42,6 +42,7 @@ jobs:
         mkdir mem
         docker run -v $(pwd)/mem:/momo throwaway:$CIRCLE_BUILD_NUM touch momo/awa.txt
         ls -la mem
+        docker run --rm throwaway:$CIRCLE_BUILD_NUM sh -c "ls && sleep 10 && ls"
   machine_dlc:
     machine: true
     steps:
@@ -66,7 +67,7 @@ jobs:
           echo "FROM alpine:latest" > $dockerfile
           echo "RUN echo hello" >> $dockerfile
           docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
-          docker run --rm throwaway:$CIRCLE_BUILD_NUM
+          docker run --rm throwaway:$CIRCLE_BUILD_NUM sh -c "ls && sleep 10 && ls"
     - run: docker version
     - run: sleep 60
     - run:
