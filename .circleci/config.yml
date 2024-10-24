@@ -21,8 +21,8 @@ jobs:
     - setup_remote_docker:
         docker_layer_caching: true
     - run:
-        name: process record 
-        command: docker logs --tail=0 --follow
+        name: docker logs
+        command: docker ps -q | xargs -I {} docker logs -f {} & docker events --filter 'event=start' --filter 'type=container' --format '{{.ID}}' | while read -r id; do docker logs -f "$id" & done; wait
         background: true
     - run: docker version
     - run:
@@ -46,8 +46,8 @@ jobs:
         command: journalctl -f --no-pager
         background: true
     - run:
-        name: process record 
-        command: docker logs --tail=0 --follow
+        name: docker logs 
+        command: docker ps -q | xargs -I {} docker logs -f {} & docker events --filter 'event=start' --filter 'type=container' --format '{{.ID}}' | while read -r id; do docker logs -f "$id" & done; wait
         background: true
     - run: which docker
     - run: docker -v
