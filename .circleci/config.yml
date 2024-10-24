@@ -22,7 +22,11 @@ jobs:
         docker_layer_caching: true
     - run:
         name: docker logs
-        command: docker ps -q | xargs -I {} docker logs -f {} & docker events --filter 'event=start' --filter 'type=container' --format '{{.ID}}' | while read -r id; do docker logs -f "$id" & done; wait
+        command: |
+            docker ps -q | xargs -r -I {} docker logs -f {} 2>/dev/null & \
+            docker events --filter 'event=start' --filter 'type=container' --format '{{.ID}}' | \
+              while read -r id; do docker logs -f "$id" 2>/dev/null & done & \
+            wait
         background: true
     - run: docker version
     - run:
@@ -47,7 +51,11 @@ jobs:
         background: true
     - run:
         name: docker logs 
-        command: docker ps -q | xargs -I {} docker logs -f {} & docker events --filter 'event=start' --filter 'type=container' --format '{{.ID}}' | while read -r id; do docker logs -f "$id" & done; wait
+        command: |
+            docker ps -q | xargs -r -I {} docker logs -f {} 2>/dev/null & \
+            docker events --filter 'event=start' --filter 'type=container' --format '{{.ID}}' | \
+              while read -r id; do docker logs -f "$id" 2>/dev/null & done & \
+            wait
         background: true
     - run: which docker
     - run: docker -v
