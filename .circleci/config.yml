@@ -20,8 +20,10 @@ jobs:
         background: true
     - setup_remote_docker:
         docker_layer_caching: true
-    - run: ssh remote-docker free -h
-    - run: ssh remote-docker lscpu
+    - run:
+        name: process record 
+        command: docker logs --tail=0 --follow
+        background: true
     - run: docker version
     - run:
         name: Build a really docker image
@@ -42,6 +44,10 @@ jobs:
     - run:
         name: Retrive logs
         command: journalctl -f --no-pager
+        background: true
+    - run:
+        name: process record 
+        command: docker logs --tail=0 --follow
         background: true
     - run: which docker
     - run: docker -v
