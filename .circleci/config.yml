@@ -59,7 +59,6 @@ jobs:
         background: true
     - run: which docker
     - run: docker -v
-    - run: sleep 500
     - run:
         name: Build a really docker image
         command: |
@@ -69,6 +68,7 @@ jobs:
           docker build -f $dockerfile --tag throwaway:$CIRCLE_BUILD_NUM .
           docker run --rm throwaway:$CIRCLE_BUILD_NUM
     - run: docker version
+    - run: sleep 60
     - run:
         name: Retrive logs
         command: journalctl --no-pager
