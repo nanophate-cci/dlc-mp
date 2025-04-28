@@ -15,7 +15,7 @@ jobs:
           while true; do
             date
             ps auxwwf
-            echo "======"
+            echo "========="
           done
         background: true
     - setup_remote_docker:
